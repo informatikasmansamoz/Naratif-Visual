@@ -790,7 +790,7 @@
                 description: "Baterai untuk kamera APS-C Sony.",
                 price: 20000,
                 category: "other",
-                image: "Sony NP-FZ100 Battery Pack | Digital Camera Batteries.jpg",
+                image: "bateraifil.jpg",
                 stock: 3
             },
             {
@@ -840,7 +840,7 @@
             // Render setiap produk
             filteredProducts.forEach(product => {
                 const productCard = document.createElement('div');
-                productCard.className = 'col-md-6 col-lg-3 mb-4';
+                productCard.className = 'col-6 col-md-6 col-lg-3 mb-4';
                 productCard.innerHTML = `
                     <div class="card product-card">
                         <img src="${product.image}" class="card-img-top product-img" alt="${product.name}">
