@@ -105,45 +105,81 @@
 
         .product-card {
             border: 1px solid #e8f5e9;
-            border-radius: 12px;
+            border-radius: 15px;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             height: 100%;
             background-color: var(--bg-light);
-            box-shadow: 0 5px 15px rgba(26, 71, 42, 0.08);
+            box-shadow: 0 4px 12px rgba(26, 71, 42, 0.1);
+            display: flex;
+            flex-direction: column;
         }
 
         .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(26, 71, 42, 0.15);
-            border-color: var(--light-green);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 28px rgba(26, 71, 42, 0.15);
+            border-color: var(--accent-color);
         }
 
         .product-img {
-            height: 200px;
+            height: 220px;
             object-fit: cover;
             width: 100%;
+            background-color: #f1f8f1;
+        }
+        
+        .product-card .card-body {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            padding: 1.5rem;
+        }
+        
+        .product-card .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+            min-height: 2.8rem;
+        }
+        
+        .product-card .card-text {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .product-price {
             color: var(--primary-color);
             font-weight: 700;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
+            margin-bottom: 0.25rem;
         }
 
         .product-price-period {
-            font-size: 0.9rem;
-            color: #666;
+            font-size: 0.85rem;
+            color: #999;
+            font-weight: 500;
         }
 
         .btn-rent {
             background-color: var(--primary-color);
             color: var(--text-light);
             font-weight: 600;
-            padding: 10px 24px;
+            padding: 11px 20px;
             border-radius: 8px;
             border: 2px solid var(--primary-color);
             transition: all 0.3s ease;
+            width: 100%;
+            margin-top: auto;
+            font-size: 0.95rem;
         }
 
         .btn-rent:hover {
@@ -230,6 +266,36 @@
             background-color: var(--primary-color);
             color: var(--text-light);
             border-color: var(--primary-color);
+        }
+
+        /* Product Grid Symmetry */
+        #productList {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+        
+        @media (min-width: 576px) {
+            #productList {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            #productList {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (min-width: 992px) {
+            #productList {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        #productList > div {
+            width: 100%;
         }
 
         .cart-badge {
@@ -395,12 +461,23 @@
             }
             
             .product-card {
-                margin-bottom: 20px;
+                margin-bottom: 0;
+                border-radius: 12px;
+            }
+            
+            .product-img {
+                height: 180px;
+            }
+            
+            .product-card .card-title {
+                min-height: auto;
+                font-size: 0.95rem;
             }
             
             .category-badge {
                 padding: 6px 12px;
                 font-size: 0.9rem;
+                margin-bottom: 8px;
             }
             
             /* Footer responsif */
@@ -594,10 +671,10 @@
     </section>
 
     <!-- Products Section -->
-    <section class="container mb-5" id="products">
-        <h2 class="text-center mb-5">Equipment Tersedia untuk Disewa</h2>
+    <section class="container mb-5" id="products" style="padding: 40px 0;">
+        <h2 class="text-center mb-5" style="font-size: 2rem; font-weight: 700;">Equipment Tersedia untuk Disewa</h2>
         
-        <div class="row" id="productList">
+        <div id="productList" style="display: grid; gap: 20px;">
             <!-- Produk akan dimuat dari JavaScript -->
         </div>
     </section>
@@ -840,7 +917,7 @@
             // Render setiap produk
             filteredProducts.forEach(product => {
                 const productCard = document.createElement('div');
-                productCard.className = 'col-6 col-md-6 col-lg-3 mb-4';
+                productCard.className = 'h-100';
                 productCard.innerHTML = `
                     <div class="card product-card">
                         <img src="${product.image}" class="card-img-top product-img" alt="${product.name}">
